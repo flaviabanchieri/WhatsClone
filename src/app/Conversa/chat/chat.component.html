@@ -1,0 +1,57 @@
+<div class="chat-container">
+  <div class="message-list">
+    <div *ngFor="let message of messages" class="message" [ngClass]="{'from-me': message.key.fromMe, 'from-others': !message.key.fromMe}">
+      <div class="message-header">
+        <span class="message-sender">{{ message.pushName || 'Desconhecido' }}</span>
+        <span class="message-time">{{ message.messageTimestamp | date:'short' }}</span>
+      </div>
+      
+      <div class="message-body">
+        <ng-container *ngIf="message.messageType === 'conversation'">
+          <div class="message-bubble">{{ message.message.conversation }}</div>
+        </ng-container>
+
+        <ng-container *ngIf="message.messageType === 'audioMessage'">
+          <audio controls>
+            <source [src]="message.message.audioMessage?.url" type="audio/ogg">
+          </audio>
+        </ng-container>
+
+        <ng-container *ngIf="message.messageType === 'videoMessage'">
+          <p style="
+    font-size: 11px;
+    background-color: rgb(78, 78, 78);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+">Mensagem de Video (Ainda não disponivel)</p>
+        </ng-container>
+
+        <ng-container *ngIf="message.messageType === 'reactionMessage'">
+          <p style="
+    font-size: 11px;
+    background-color: rgb(78, 78, 78);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+">Figurinha (Ainda não disponivel)</p>
+        </ng-container>
+
+        <ng-container *ngIf="message.messageType === 'imageMessage'">
+          <p style="
+    font-size: 11px;
+    background-color: rgb(78, 78, 78);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+">Mensagem de Imagem (Ainda não disponivel)</p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <input [(ngModel)]="newMessage" placeholder="Digite uma mensagem..." />
+    <button [disabled]="!newMessage">Enviar</button>
+  </div>
+</div>

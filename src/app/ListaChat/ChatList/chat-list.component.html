@@ -1,0 +1,23 @@
+<div class="chat-list-container">
+  <mat-list *ngIf="chats.length > 0">
+    <mat-list-item *ngFor="let chat of chats" class="chat-item"  [routerLink]="['/chat', chat.remotejid]">
+      <div class="avatar-container">
+        <mat-icon class="avatar-icon">{{ chat.name?.charAt(0)?.toUpperCase() || '?' }}</mat-icon>
+      </div>
+      <div class="chat-info chat-list">
+        <div class="chat-header">
+          <span class="chat-name">{{ chat.name || chat.remotejid }}</span>
+          <span class="chat-time">{{ chat.updatedAt | date: 'shortTime' }}</span>
+        </div>
+        <div class="chat-message">
+          <span>{{ chat.unreadMessages }} mensagens não lidas </span> 
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+
+  <div *ngIf="chats.length === 0" class="empty-state">
+    <mat-icon>chat_bubble_outline</mat-icon>
+    <span>Nenhuma conversa disponível.</span>
+  </div>
+</div>
