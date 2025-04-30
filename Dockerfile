@@ -1,7 +1,7 @@
 #stage 1
 FROM node:18-alpine as compilador
 WORKDIR /app
-COPY .. .
+COPY . .
 RUN npm install
 RUN npm run build
 
@@ -12,4 +12,5 @@ LABEL empresa="WhatsCLone"
 LABEL imagem="front"
 
 COPY ../nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=compilador /app/dist /usr/share/nginx/html
+COPY --from=compilador /app/dist/whats-clone/browser /usr/share/nginx/html
+
