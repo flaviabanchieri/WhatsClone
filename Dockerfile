@@ -11,6 +11,7 @@ FROM nginx:alpine
 LABEL empresa="WhatsCLone"
 LABEL imagem="front"
 
-COPY ../nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=compilador /app/dist/whats-clone/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=compilador /app/dist/whats-clone /usr/share/nginx/html
+
 
